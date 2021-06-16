@@ -1,0 +1,65 @@
+{% extends "head.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Регистрация</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. <a></a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="/signup">
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="usr" placeholder="Имя пользователя"  required>
+                </div>
+            </div>
+
+
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" id="pass1"  type="password" name="pass" placeholder="Пароль" required>
+                </div>
+            </div>
+
+            
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" id="pass2" type="password" name="pass2" placeholder="Повторите пароль" required>
+                </div>
+            </div>
+
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large"  type="date" id="birthday" name="bday" placeholder="Дата рождения" required>
+                </div>
+            </div>
+
+
+            <script>
+                document.getElementById("pass1").onsubmit = function() {
+                if (document.getElementById("pass1").value == document.getElementById("pass2").value) {
+                    return true;
+                }
+                else {
+                    alert("Passwords do not match");
+                return false;
+                    }
+                }
+            </script>
+
+
+
+
+            <button class="button is-block is-info is-large is-fullwidth">Регистрация</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

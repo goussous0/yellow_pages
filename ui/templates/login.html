@@ -1,0 +1,81 @@
+{% extends "head.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Окно авторизации</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. <a href="{{ url_for('ui.login') }}">Пользователь с такими данными не найден</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="/login">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" id="usr" type="text" name="usrname" placeholder="Имя пользователя" >
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" id="password" type="password" name="passwrd" placeholder="Пароль">
+                </div>
+            </div>
+
+
+            <button class="button is-block is-info is-large is-fullwidth" formaction="/login" name="login" style="float: left;"  > Login</button>
+            <button class="button is-block is-info is-large is-fullwidth" formaction="/signup" name="signup" style="float: left;" > signup </button>
+            <button class="button is-block is-info is-large is-fullwidth" formaction="/logout" name="canel" style="float: right;"  > cancel </button>
+
+
+
+
+
+
+
+
+            <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox" id="rememberMe">
+                    Remember me
+                </label>
+            </div>
+
+
+
+            <script type="text/javascript"> 
+                function myFunction() {
+                    var x = document.getElementById("password");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                        x.type = "password";
+                        }
+                }
+            </script>
+
+            <div class="field">
+                <label class="checkbox">
+                     <input type="checkbox" onclick="myFunction()"> Show Password 
+                </label>
+            </div>
+
+
+            
+
+
+            <div>
+                <a href="{{ url_for( 'ui.reset' ) }}"> Забыли пароль?</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+<!-- <input type="checkbox" onclick="myFunction()">Show Password -->

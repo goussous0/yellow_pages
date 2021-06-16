@@ -1,0 +1,103 @@
+
+
+
+{% extends "head.html" %}
+
+{% block content %}
+
+
+
+  <body>
+
+  <form action="/filter/АБ" style="float: left;">
+      <button type="submit">АБ</button>
+    </form>
+
+
+    <form action="/filter/ВГ" style="float: left;">
+      <button type="submit">ВГ</button>
+    </form>
+    <form action="/filter/ДЕ" style="float: left;">
+      <button type="submit">ДЕ</button>
+    </form>
+    <form action="/filter/ЖЗИЙ" style="float: left;">
+      <button type="submit">ЖЗИЙ</button>
+    </form>
+    <form action="/filter/КЛ" style="float: left;">
+      <button type="submit">КЛ</button>
+    </form>
+
+    <form action="/filter/МН" style="float: left;">
+      <button type="submit">МН</button>
+    </form>
+
+    <form action="/filter/ОП" style="float: left;">
+      <button type="submit">ОП</button>
+    </form>
+
+    <form action="/filter/РС" style="float: left;">
+      <button type="submit">РС</button>
+    </form>
+
+    <form action="/filter/ТУ" style="float: left;">
+      <button type="submit">ТУ</button>
+    </form>
+
+    <form action="/filter/ФХ" style="float: left;">
+      <button type="submit">ФХ</button>
+    </form>
+
+    <form action="/filter/ЦЧШЩ" style="float: left;">
+      <button type="submit">ЦЧШЩ</button>
+    </form>
+    <form action="/filter/ЪЫЬЭ" style="float: left;">
+      <button type="submit">ЪЫЬЭ</button>
+    </form>
+    <form action="/filter/ЮЯ" style="float: left;">
+      <button type="submit">ЮЯ</button>
+    </form>
+
+    <div class="container">
+      <div class="table-responsive">
+
+          <div class="content">
+    
+    
+
+ 
+
+        <table class="table table-striped custom-table" id="table1" style="float: right;">
+          <thead>
+            <tr>
+
+              <th scope="col">Name</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Birthday</th>
+              
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for usr in all_users %}
+            <tr scope="row">        
+                      <td><a  href="{{ url_for('ui.edit', id=usr.id) }}"> {{usr.username}}</a>
+                        
+                      </td>
+                      <td><a> {{usr.phone_number}} </a></td>
+                      <td>
+                        <small class="d-block">{{  usr.birth_day.year }}-{{  usr.birth_day.day }}-{{  usr.birth_day.month }}</small>
+                      </td>
+                      <td><a href="{{ url_for('ui.remove', id=usr.id) }}"> delete </a></td>
+                      
+
+            </tr> 
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </body>
+
+
+  {% endblock %}
