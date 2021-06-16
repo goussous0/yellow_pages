@@ -49,7 +49,7 @@ def token_required(f):
                 
                 else:
                 	return redirect(url_for('ui.home'))
-                    #return jsonify({"status": "error","message": {"token": "Токен истёк"}})
+                    
 
         except :
             return redirect(url_for('ui.home'))
@@ -266,11 +266,7 @@ def get_nums():
 @token_required
 def edit(id):
 
-	#users = User.query.all()
 
-	#phone_nums = [ user.num for user in users ]
-
-	#print (phone_nums)
 
 
 	usr = User.query.get(id)
