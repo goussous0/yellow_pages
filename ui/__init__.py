@@ -40,10 +40,15 @@ def token_required(f):
 
         try:
             if not session['t0k3n'] :
-                return jsonify({"status": "error","message": {"token": "Токен истёк"}})
+            	print ("Error No t0k3n found")
+            	return jsonify({"status": "error","message": {"token": "Токен истёк"}})
             else :
-                data = jwt.decode( session['t0k3n'] , current_app.config['SECRET_KEY'] , algorithms=["HS256"])
-                print (data)
+                data = jwt.decode( session['t0k3n'] , current_app.config['SECRET_KEY'] , algorithms="HS256")
+                print ("Data -> ",data)
+
+                print (data['usr'] ,"<<--->>", session['usr'])
+
+
                 if data['usr'] == session['usr']:
                     return  f( *args, **kwargs)
                 
@@ -52,7 +57,8 @@ def token_required(f):
                     
 
         except :
-            return redirect(url_for('ui.home'))
+        	print (current_app.config['SECRET_KEY'])
+        	return redirect(url_for('ui.home'))
 
 
         
@@ -183,7 +189,12 @@ def login():
 			flash("Loggin in ... ")
 
 			session['usr'] = usr_name
-			token =jwt.encode({'usr':f'{check_usr.username}' , 'exp': datetime.utcnow() + timedelta(minutes=1440)} , current_app.config['SECRET_KEY'] , algorithm="HS256" )  
+			payload_data = {"usr":f"{usr_name}",
+							"exp":datetime.utcnow() + timedelta(minutes=1440)}
+			
+			token = jwt.encode(payload_data , current_app.config['SECRET_KEY'], algorithm="HS256" )
+
+			
 			session['t0k3n'] = token
 			
 
@@ -272,10 +283,8 @@ def edit(id):
 	usr = User.query.get(id)
 
 	if request.method == 'POST':
-
+		## check if the same user trying to make changes
 		if usr.username == session['usr'] :
-			## this is the same usr 
-			
 
 			## check for a phone number or a name change to edit this info 
 
