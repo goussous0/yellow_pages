@@ -44,11 +44,6 @@ def token_required(f):
             	return jsonify({"status": "error","message": {"token": "Токен истёк"}})
             else :
                 data = jwt.decode( session['t0k3n'] , current_app.config['SECRET_KEY'] , algorithms="HS256")
-                print ("Data -> ",data)
-
-                print (data['usr'] ,"<<--->>", session['usr'])
-
-
                 if data['usr'] == session['usr']:
                     return  f( *args, **kwargs)
                 
@@ -57,7 +52,6 @@ def token_required(f):
                     
 
         except :
-        	print (current_app.config['SECRET_KEY'])
         	return redirect(url_for('ui.home'))
 
 
@@ -331,13 +325,4 @@ def filt(letters):
 
 
 	return render_template ('home.html' , all_users=filtered)
-
-
-
-
-
-
-
-
-
 
