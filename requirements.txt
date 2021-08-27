@@ -2,5 +2,5 @@ email_validator
 flask_sqlalchemy
 flask_login
 flask_script
-jwt
+pyjwt
 flask_security
