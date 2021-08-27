@@ -24,6 +24,7 @@ The public routes are:
 - register 
 - login 
 - homepage 
+
 The private routes are:
 - edit
 - remove 
